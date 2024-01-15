@@ -110,7 +110,7 @@ Sur windows obligé de spécifier le chemin complet de l'éditeur de texte.
 
 Voici un exemple : 
 
-```
+```sh
 git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe'
 -multiInst -notabbar -nosession -noPlugin"
 ```
@@ -139,6 +139,104 @@ git <commande> --help
 
 #### Les bases de Git
 
-```
+```sh
 git init
+```
+#### TP SSHkey
+
+```sh
+ssh-keygen -t ed25519 -C "yohann.mathieux@ecole-isitech.fr"
+```
+
+mettre la clé public sur github
+
+```sh
+git push -u origin main
+```
+-u à utiliser que la première fois
+
+Pour supprimer le remote 
+```sh
+git remote rm origin
+```
+
+Pour les push suivant il suffira d'écrire la commande 
+```sh
+git push
+```
+
+Pour cloner 
+
+```sh
+git clone "URL"
+```
+
+#### Ignorer des fichiers
+
+Pour ignorer des fichiers il suffit de créer un fichier .gitignore et d'y ajouter les fichiers et les dossiers 
+
+#### Valider des modifications 
+
+```sh
+git commit -m "message"
+```
+
+#### Effacer des fichiers
+
+```sh
+rm
+
+git status
+
+git rm <fichier>
+```
+
+cette dernière commande vas indexer le fichier pour qu'il soit supprimé lors du prochain commit.
+
+Il existe une autre forme de suppression de fichier qui consiste à utiliser la commande suivante
+
+```sh
+git rm --cached <fichier>
+```
+
+cette commande va supprimer le fichier de l'index mais pas du disque dur.
+
+#### Visualiser l'historique
+
+```sh
+git log
+```
+
+#### Désindexer des éléments déjà commits
+
+TP à faire
+
+```sh
+git remote show origin
+```
+
+#### Création de tags
+
+En plus d'identifier les commits par des identifiants unique, Git vous permet aussi d'étiqueter un certain état de l'historique (commit) comme étant important. Cela peut être utile pour marquer des versions de votre code source.
+
+```sh
+git tag -a V1.0 -m "Version 1.0"
+```
+
+On peut lister les tags avec la commande suivante :
+
+```sh
+git tag
+```
+
+on peut aussi filtrer
+
+```sh
+git tag -l ""
+```
+
+Pour visualiser une étiquette, on utilise la commande suivante :
+
+```sh
+git show V1.4
 ```
