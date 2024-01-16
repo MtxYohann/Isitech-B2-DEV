@@ -1,4 +1,4 @@
-# Git 
+# Jour 1: 
 Read.md (Markdown) obligatoire (Markdown.org si question)
 Obsidian pour organiser les notes
 
@@ -240,3 +240,109 @@ Pour visualiser une étiquette, on utilise la commande suivante :
 ```sh
 git show V1.4
 ```
+
+
+# Jour 2:
+
+#### Les branches
+
+Pour créer une branche il suffit de faire la commande :
+
+```sh
+git branch <nom-de-branche>
+```
+git branch créer une nouvelle branche mais ne vous fait pas basculer dessus.
+
+
+Pour afficher les branches on peut faire la commande :
+
+```sh
+git log --oneline --decorate --graph --all
+```
+
+Pour créer une branche et directement basculer dessus on peut faire la commande 
+
+```sh
+git checkout -b <nom-de-branche>
+```
+
+#### Fusionner des branches
+
+```sh
+git checkout -b iss53
+```
+
+On va commencer à travailler sur l'issue 53 et effectuer un premier commit:
+
+```sh
+git commit -m "commit 3"
+```
+
+On va ensuite rebasculer sur la branche master afin d'effectuer un hotfix:
+
+```sh
+git checkout master
+```
+
+```sh
+git branch hotfix
+git commit -m "commit 4"
+```
+Nous sommes satisfait du hotfix et nous allons le valider:
+
+```sh
+git checkout master
+git merge hotfix
+```
+
+La branche hotfix n'a plus lieu d'être et nous allons la supprimer
+
+```sh
+git branch iss53
+```
+
+On effectue un nouveau commit afin de valider notre travail
+
+```sh
+git commit -m "commit 5"
+```
+![alt text](Img6.jpg)
+
+On vas maintenant retourner sur master et effectuer un merge avec iss53
+
+```sh
+git checkout master
+
+git merge iss53
+```
+
+La stratégie de merge est alors différente de celle utilisée précédemment: Merge commit
+
+Au lieu d'avancer la branche master, Git crée un nouveau commit qui contien les différences entre les deux branches.
+
+![alt text](Img7.jpg)
+
+On peut supprimer la branche iss53:
+
+```sh
+git branch -d iss53
+```
+
+#### Résoudre des conflits
+
+Un conflit a lieu lorsque deux branches différentes ont modifiées la même partie du même fichier, ou si un fichier a été supprimé dans un branche alors qu'il a été madifié dans une autre.
+
+![Alt text](Img8.jpg)
+
+Physiquement, un conflit est reporésenté paar des caratères spéciaux qui apparaissent dans le fichier.
+
+![Alt text](Img9.jpg)
+
+Après résolution du conflit il suffit de commit.
+
+Vous avez un outil qui permet de résoudre les conflits avec git :
+
+```sh
+git mergetool
+```
+
