@@ -346,3 +346,110 @@ Vous avez un outil qui permet de résoudre les conflits avec git :
 git mergetool
 ```
 
+# Jour 3 :
+
+#### Suite conflit
+
+Afficher toutes les chranches :
+
+```sh
+git branch -a
+git branch --all
+```
+
+Parlons un peu de la commande `git fetch` : elle permet de synchroniser vos travaux, elle va rechercher le serveur qui heberge <distant> et va récupérer les modifications qui ont été effectuées sur le serveur distant.
+
+#### Pousser des modifications
+
+```sh
+git push <distant> <branche>
+
+git push origin master
+
+git push -u origin master
+```
+
+Pour récupérer les modifications effectuées sur le serveur distant à propos de nouvelles branches ou de branches existantes :
+
+```sh
+git fetch <distant>
+```
+
+Pour récupérer des modifications et les fusionner avec vos branches locales :
+
+```sh
+git pull <distant> <branche>
+```
+
+La règle d'or lorsqu'on debute avec Git:
+
+`commit` -> `pull` -> `push`
+
+Lorsque vous récupérer des branches distantes avec la commande fetch, vous ne créez pas atuomatiquement une branche locale qui suit la branche distante. vous devez créer une branche locale et la lier à la branche distante.
+
+```sh
+git checkout -b <nom-de-branche> <distant>/<nom-de-branche>
+```
+
+On a un raccourci pour cette commande : 
+
+```sh
+git checkout --track <distant>/<nom-de-commande>
+```
+
+Encore plus court, si la branche locale n'éxiste pas encore : 
+
+```sh
+git checkout <nom-de-branche>
+```
+
+Afin de visualiser tout ça on peut utiliser la commande suivante :
+
+```sh
+git fetch --all
+
+git branch -vv
+```
+
+Analysons un peu la commande suivante :
+
+```sh
+git push origin --delete une-branche
+```
+
+#### Rebaser votre travail
+
+Avec git il y a daux manières d'intégrer les modifications d'un branche dans une autre : 
+-La fusion (merge)
+-le rebasage (rebase)
+
+![Alt text](Img10.jpg)
+
+Après un merge on obtient cela :
+
+```sh
+git checkout master
+
+git merge experiment
+```
+
+![Alt text](Img11.jpg)
+
+Avec le rebase on aurait entré les commandes suivantes :
+
+```sh
+git checkout experiment
+
+git rebase master
+```
+
+Et voici le résultat :
+
+![Alt text](Img12.jpg)
+
+et maintenant le résusltat final :
+
+![Alt text](Img13.jpg)
+
+la commande rebase surprime une partie de l'historique de la branche sélectionné donc elle est dangeureuse.
+
